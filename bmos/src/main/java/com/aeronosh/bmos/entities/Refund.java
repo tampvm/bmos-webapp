@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "Tbl_Refund")
 public class Refund implements Serializable {
     @Id
-    @Column(name = "refund_id")
+    @Column(name = "refund_id", columnDefinition = "varchar(10)", nullable = false)
     private String refundId;
 
     @ManyToOne

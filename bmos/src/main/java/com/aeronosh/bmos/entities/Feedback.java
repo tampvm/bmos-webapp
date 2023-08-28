@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "Tbl_Feedback")
 public class Feedback implements Serializable {
     @Id
-    @Column(name = "feedback_id")
+    @Column(name = "feedback_id", columnDefinition = "varchar(10)", nullable = false)
     private String feedbackId;
 
     @ManyToOne

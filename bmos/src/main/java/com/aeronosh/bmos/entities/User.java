@@ -11,13 +11,13 @@ import java.util.List;
 @Table(name = "Tbl_User")
 public class User implements Serializable {
     @Id
-    @Column(name = "user_id", columnDefinition = "varchar(50)", nullable = false)
+    @Column(name = "user_id", columnDefinition = "varchar(10)", nullable = false)
     private String userId;
 
     @Column(name = "username", columnDefinition = "varchar(100)")
     private String username;
 
-    @Column(name = "password", columnDefinition = "varchar(20)")
+    @Column(name = "password", columnDefinition = "varchar(16)")
     private String password;
 
     @Column(name = "is_confirm", columnDefinition = "bit")
@@ -44,7 +44,7 @@ public class User implements Serializable {
     @Column(name = "status", columnDefinition = "bit")
     private Boolean status;
 
-    @Column(name = "google_id", columnDefinition = "varchar(100)")
+    @Column(name = "google_id", columnDefinition = "varchar(max)")
     private String googleId;
 
     @ManyToOne

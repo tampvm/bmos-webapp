@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "Tbl_Order")
 public class Order implements Serializable {
     @Id
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "order_id", columnDefinition = "varchar(10)", nullable = false)
     private String orderId;
 
     @ManyToOne
@@ -24,13 +24,13 @@ public class Order implements Serializable {
     @Column(name = "date", columnDefinition = "datetime")
     private Date date;
 
-    @Column(name = "address", columnDefinition = "ntext")
+    @Column(name = "address", columnDefinition = "nvarchar(max)")
     private String address;
 
     @Column(name = "phone", length = 10)
     private String phone;
 
-    @Column(name = "note", columnDefinition = "text")
+    @Column(name = "note", columnDefinition = "nvarchar(max)")
     private String note;
 
     @Column(name = "payment_type", length = 50)

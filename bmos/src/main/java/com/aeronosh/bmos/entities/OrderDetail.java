@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Table(name = "Tbl_OrderDetail")
 public class OrderDetail implements Serializable {
     @Id
-    @Column(name = "order_detail_id", nullable = false)
+    @Column(name = "order_detail_id", columnDefinition = "varchar(10)", nullable = false)
     private String orderDetailId;
 
     @ManyToOne

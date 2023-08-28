@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "Tbl_Product")
 public class Product implements Serializable {
     @Id
-    @Column(name = "product_id", nullable = false)
+    @Column(name = "product_id", columnDefinition = "varchar(10)", nullable = false)
     private String productId;
 
     @Column(name = "name", columnDefinition = "varchar(100)")
@@ -19,14 +19,11 @@ public class Product implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "description", columnDefinition = "ntext")
+    @Column(name = "description", columnDefinition = "nvarchar(max)")
     private String description;
 
     @Column(name = "weight")
     private Double weight;
-
-    @Column(name = "sold_quantity")
-    private Integer soldQuantity;
 
     @Column(name = "is_loved")
     private Boolean isLoved;
@@ -37,7 +34,7 @@ public class Product implements Serializable {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "type")
+    @Column(name = "type", columnDefinition = "varchar(50)")
     private String type;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)

@@ -9,8 +9,9 @@ import lombok.Data;
 @Table(name = "Tbl_Permission")
 public class Permission implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "permission_id", nullable = false)
-    private String permissionId;
+    private Integer permissionId;
 
     @OneToOne
     @JoinColumn(name = "user_role_id")

@@ -10,10 +10,10 @@ import java.util.List;
 @Table(name = "Tbl_Routing")
 public class Routing implements Serializable {
     @Id
-    @Column(name = "routing_id", nullable = false)
+    @Column(name = "routing_id", columnDefinition = "varchar(10)", nullable = false)
     private String routingId;
 
-    @Column(name = "name")
+    @Column(name = "name", columnDefinition = "nvarchar(100)")
     private String name;
 
     @Column(name = "description", columnDefinition = "nvarchar(max)")

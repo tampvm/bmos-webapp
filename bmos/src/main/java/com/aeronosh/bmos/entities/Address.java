@@ -13,7 +13,7 @@ public class Address implements Serializable {
     @Column(name = "address_id", nullable = false)
     private Integer addressId;
 
-    @Column(name = "address", columnDefinition = "nvarchar(250)")
+    @Column(name = "address", columnDefinition = "nvarchar(max)")
     private String address;
 
     @Column(name = "city_province", columnDefinition = "nvarchar(100)")

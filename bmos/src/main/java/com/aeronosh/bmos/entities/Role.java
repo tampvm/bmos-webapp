@@ -10,8 +10,9 @@ import lombok.Data;
 @Table(name = "Tbl_Role")
 public class Role implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_role_id", nullable = false)
-    private int userRoleId;
+    private Integer userRoleId;
 
     @Column(name = "role_name", columnDefinition = "nvarchar(10)")
     private String roleName;

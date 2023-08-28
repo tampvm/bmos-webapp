@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Table(name = "Tbl_FavouriteList")
 public class FavouriteList implements Serializable {
     @Id
-    @Column(name = "favourite_list_id")
+    @Column(name = "favourite_list_id", columnDefinition = "varchar(10)", nullable = false)
     private String favouriteListId;
 
     @ManyToOne
