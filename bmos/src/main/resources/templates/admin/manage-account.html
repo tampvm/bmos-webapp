@@ -11,10 +11,10 @@
     <title>Quản lý tài khoản</title>
 </head>
 <body>
-    <div th:insert="~{admin/common/preloader :: body}"></div>
-    <header th:insert="~{admin/common/header :: header}"></header>
+    <div th:replace="~{admin/common/preloader :: preloader}"></div>
+    <header th:replace="~{admin/common/header :: header}"></header>
     <div class="main">
-        <aside th:insert="~{admin/common/sidebar :: aside}"></aside>
+        <aside th:replace="~{admin/common/sidebar :: sidebar}"></aside>
         <div class="container">
             <div class="container-title">
                 <h4>Quản Lý Tài Khoản</h4>
@@ -88,9 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container-footer">
-                2023 © petfood.com
-            </div>
+            <div th:replace="~{admin/common/footer :: footer}" ></div>
         </div>
     </div>
     <script>
