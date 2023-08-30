@@ -1,0 +1,22 @@
+<aside xmlns:th="http://www.thymeleaf.org">
+    <ul>
+        <li><a th:href="@{/admin/dashboard}"><span><i class="fa-solid fa-chart-line"></i></span> <span> DashBoard</span></a></li>
+        <li ><a th:href="@{/admin/tai-khoan}"><span><i class="fa-solid fa-users"></i></span> <span>Tài Khoản</span></a></li>
+        <li><a href="#"><span> <i class="fa-solid fa-tags"></i></span> <span>Sản Phẩm</span></a></li>
+        <li><a href="#"><span><i class="fa-solid fa-file-invoice-dollar"></i></span> </i> <span>Đơn Hàng</span></a></li>
+        <li><a href="#"><span><i class="fa-solid fa-blog"></i></span>  <span>Blog</span></a></li>
+        <li><a href="#"><span><i class="fa-solid fa-users-gear"></i></span>  <span>Vai Trò</span></a></li>
+        <li><a href="#"><span><i class="fa-solid fa-user-shield"></i> </span> <span>Phân Quyền</span></a></li>
+        <li><a href="#"><span><i class="fa-brands fa-discourse"></i></span>  <span>Mã Giảm Giá</span></a></li>
+        <li><a href="#"><span><i class="fa-solid fa-comments"></i> </span> <span>Đánh Giá</span></a></li>
+    </ul>
+    <script>
+        var currentURI = window.location.pathname;
+        $('li a').each(function() {
+            var href = $(this).attr("href");
+            if (href === currentURI) {
+                $(this).closest("li").addClass("active");
+            }
+        });
+    </script>
+</aside>

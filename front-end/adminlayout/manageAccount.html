@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root{
+            --header-color:#85b4d0;
+            --side-bar-color:#516673;
+        }
+
+        body{
+            font-family: 'Rubik', sans-serif;
+        }
+        /*Start header*/
+        header{
+            background-color: var(--header-color);
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo{
+            width: 220px;
+            background-color: #77a2bb;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            gap: 24px;
+        }
+
+        .logo-icon{
+            display: flex;
+            justify-content: center;
+            height: 40px;
+            width: 40px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .logo-icon p{
+            line-height: 40px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #77a2bb;
+        }
+
+        .logo-text{
+            color: #fff;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo-text span:first-child{
+            font-weight: 700;
+        }
+
+        .logo-text span:last-child{
+            font-weight: 300;
+        }
+
+        .header-container{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .menu-btn{
+            display: none;
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--side-bar-color);
+        }
+
+        .header-search-bar{
+            position: relative;
+            width: fit-content;
+            margin-left: 16px;
+        }
+        .header-search-bar input{
+            height: 30px;
+            padding: 7px 40px 7px 20px;
+            font-size: 13px;
+            color: #797979;
+            width: 180px;
+            border: none;
+            border-radius: 24px;
+            outline: none;
+            transition: all ease-in-out .4s;
+        }
+
+        .header-search-bar input:focus{
+            width: 280px;
+        }
+
+        .header-search-bar button{
+            border: none;
+            font-size: 14px;
+            color: #797979;
+            height: 30px;
+            width: 30px;
+            background:transparent;
+            position: absolute;
+            right: 0px;
+            top: 0;
+            cursor: pointer;
+            line-height: 30px;
+        }
+
+        .header-right{
+            margin-right: 16px;
+            display: flex;
+            gap:12px;
+        }
+
+        .avatar{
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .avatar img{
+            height: 100%;
+        }
+
+        .user-name{
+            line-height: 40px;
+            text-transform: capitalize;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        /*End header*/
+        .main{
+            display: flex;
+        }
+        /*Start side bar*/
+        aside{
+           min-width: 220px;
+           width: 220px;
+           background-color: var(--side-bar-color);
+           padding-top: 16px;
+        }
+
+        aside li{
+            height: 50px;
+        }
+
+        aside li.active{
+            border-left: 3px solid #85b4d0;
+            background-color: #4B5F6B;
+        }
+
+        aside li:hover{
+            background-color: #4B5F6B;
+        }
+        
+        aside li a{
+            text-decoration: none;
+            color: #C8D1D6;
+            line-height: 20px;
+            display: block;
+            padding: 15px 30px 15px 15px;
+        }
+
+
+        aside li a i{
+            margin-right: 7px;
+            display: inline-block;
+            width: 22px;
+        }
+
+        aside li.active a i{
+            color: #85B4D0;
+        }
+
+        aside li a span{
+            font-weight: 300;
+            font-size: 14px;
+        }
+        aside li a span:first-child{
+            width: 25px;
+        }
+
+        aside li.active a span{
+            font-weight: 500;
+            color: #fff;
+        }
+        /*End side bar*/
+
+        .container{
+            display: flex;
+            flex-direction: column;
+            flex:1;
+        }
+
+        .container-title{
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container-title h4{
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .btn-rect-5-10{
+            padding: 5px 10px;
+            font-size: 12px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-rect-7-14{
+            padding: 7px 14px;
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-rect-7-14.active{
+            background-color: #13DAF9;
+            color: #fff;
+        }
+
+        .btn-rect-7-14.disable{
+            pointer-events: none;
+        }
+
+        .btn-rect-7-14:hover{
+            background: linear-gradient(to bottom, #585858 0%, #111 100%);
+            color: #fff;
+        }
+
+        .btn-color-green{
+            background-color: #becfa6;
+        }
+
+        .btn-color-info{
+            background-color: #85b4d0;
+        }
+
+        .btn-color-danger{
+            background-color: #cbb2ae;
+        }
+
+        .btn-color-primary{
+            background-color: #b5a8b9;
+        }
+        
+        .content-wrapper{
+            background-color: #edf1f5;
+            min-height: calc(100vh - 154px);
+            padding: 25px;
+        }
+
+        .content{
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            min-height: 100%;
+        }
+
+        .content-top-bar{
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .display-option select{
+            width: 60px;
+            height: 30px;
+            margin: 0 4px;
+            border: 1px solid #333;
+        }
+
+        .content-search-bar input{
+            height: 30px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 7px;
+            outline: none;
+        }
+
+        .table-container{
+            display: contents;
+        }
+
+        .tb-style-1{
+            text-align: left;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .tb-style-1 th,.tb-style-1 td{
+            padding: 15px 8px;
+            font-size: 14px;
+        }
+
+        .tb-style-1 td{
+            border-bottom: 1px solid #e4e7ea;
+            color: #797979;
+            font-weight: 300;
+        }
+
+        .tb-style-1 th{
+            border-bottom: 2px solid #e4e7ea;
+            color: #666;
+        }
+
+        .tb-style-1 tr:last-child td{
+            border-bottom: 1px solid #333;
+        }
+
+        .content-bottom-bar{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .pagination{
+            gap: 8px;
+        }
+
+        .container-footer{
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            line-height: 20px;
+        }
+
+        /*responsive*/
+        @media screen and (max-width:740px) {
+            .main{
+                flex-direction: column;
+            }
+            
+            .logo{
+                width: fit-content;
+            }
+
+            .menu-btn{
+                display: inline-block;
+            }
+
+            .logo-text, .header-search-bar{
+                display: none;
+            }
+
+            aside{
+                display: none;
+                width: 100%;
+            }
+
+            .content-top-bar{
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .table-container{
+                display: block;
+                max-width: 100%;
+                overflow-x: scroll;
+            }
+
+            .action-container{
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .content-bottom-bar{
+                flex-direction: column;
+                gap: 8px;
+            }
+            .content-bottom-bar span{
+                margin-left: 14px;
+            }
+            
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <p>P</p>
+            </div>
+            <div class="logo-text">
+                <span>Pet</span><span>food</span>
+            </div>
+        </div>
+        <div class="header-container">
+            <form action="#" class="header-search-bar">
+                <input name="txtHeaderSearch" placeholder="Search..." type="text">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <span class="menu-btn"><i class="fa-solid fa-bars"></i></span>
+            <div class="header-right">
+                <div class="avatar">
+                    <img src="../img/background.jpg" alt="">
+                </div>
+                <p class="user-name">
+                    administrator
+                </p>
+            </div>
+        </div>     
+    </header>
+    <div class="main">
+        <aside>
+            <ul>
+                <li class="active"><a href="#"><span><i class="fa-solid fa-chart-line"></i></span> <span>DashBoard</span></a></li>
+                <li><a href="#"><span><i class="fa-solid fa-users"></i></span> <span>Tài Khoản</span></a></li>
+                <li><a href="#"><span> <i class="fa-solid fa-tags"></i></span> <span>Sản Phẩm</span></a></li>
+                <li><a href="#"><span><i class="fa-solid fa-file-invoice-dollar"></i></span> </i> <span>Đơn Hàng</span></a></li>
+                <li><a href="#"><span><i class="fa-solid fa-blog"></i></span>  <span>Blog</span></a></li>
+                <li><a href="#"><span><i class="fa-solid fa-users-gear"></i></span>  <span>Vai Trò</span></a></li>
+                <li><a href="#"><span><i class="fa-solid fa-user-shield"></i> </span> <span>Phân Quyền</span></a></li>
+                <li><a href="#"><span><i class="fa-brands fa-discourse"></i></span>  <span>Mã Giảm Giá</span></a></li>
+                <li><a href="#"><span><i class="fa-solid fa-comments"></i> </span> <span>Đánh Giá</span></a></li>
+            </ul>
+        </aside>
+        <div class="container">
+            <div class="container-title">
+                <h4>Quản Lý Tài Khoản</h4>
+                <a href="#" class="btn-rect-5-10 btn-color-green">Thêm Mới</a>
+            </div>
+            <div class="content-wrapper">
+                <div class="content">
+                    <div class="content-top-bar">
+                        <span class="display-option">
+                            Hiển thị 
+                            <select>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                            </select>
+                             mục
+                        </span>
+
+                        <form action="#" class="content-search-bar">
+                            <label>Search: </label><input type="text" name="txtContentSearch">
+                        </form>
+                    </div>
+                    <div class="table-container">
+                        <table class="tb-style-1">
+                            <tr>
+                                <th>STT</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn</td>
+                                <td>Thành Long</td>
+                                <td>@long99955</td>
+                                <td>admin</td>
+                                <td>
+                                    <div class="action-container">
+                                        <a href="#" class="btn-rect-5-10 btn-color-info">Xem</a>
+                                        <a href="#" class="btn-rect-5-10 btn-color-primary">Sửa</a>
+                                        <a href="#" class="btn-rect-5-10 btn-color-danger">Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn</td>
+                                <td>Thành Long</td>
+                                <td>@long99955</td>
+                                <td>admin</td>
+                                <td>
+                                    <div class="action-container">
+                                        <a href="#" class="btn-rect-5-10 btn-color-info">Xem</a>
+                                        <a href="#" class="btn-rect-5-10 btn-color-primary">Sửa</a>
+                                        <a href="#" class="btn-rect-5-10 btn-color-danger">Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="content-bottom-bar">
+                        <span>Hiển Thị 1 đến 10 của 12 mục</span>
+                        <div class="pagination">
+                            <a class="btn-rect-7-14 disable" href="#">Previous</a>
+                            <a class="btn-rect-7-14 active" href="#">1</a>
+                            <a class="btn-rect-7-14" href="#">2</a>
+                            <a class="btn-rect-7-14" href="#">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-footer">
+                2023 © petfood.com
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.menu-btn').click(function (){
+            $('aside').slideToggle(400);
+        })
+    </script>
+</body>
+</html>

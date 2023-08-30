@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/sidebar.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Quản lý tài khoản</title>
+</head>
+<body>
+    <div th:insert="~{admin/common/preloader :: body}"></div>
+    <header th:insert="~{admin/common/header :: header}"></header>
+    <div class="main">
+        <aside th:insert="~{admin/common/sidebar :: aside}"></aside>
+        <div class="container">
+            <div class="container-title">
+                <h4>Quản Lý Tài Khoản</h4>
+                <a href="#" class="btn-rect-5-10 btn-color-green">Thêm Mới</a>
+            </div>
+            <div class="content-wrapper">
+                <div class="content">
+                    <div class="content-top-bar">
+                        <span class="display-option">
+                            Hiển thị
+                            <select>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                            </select>
+                             mục
+                        </span>
+
+                        <form action="#" class="content-search-bar">
+                            <label>Search: </label><input type="text" name="txtContentSearch">
+                        </form>
+                    </div>
+                    <div class="table-container">
+                        <table class="tb-style-1">
+                            <tr>
+                                <th>STT</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn</td>
+                                <td>Thành Long</td>
+                                <td>@long99955</td>
+                                <td>admin</td>
+                                <td>
+                                    <div class="action-container">
+                                        <a href="#" class="btn-rect-5-10 btn-color-info">Xem</a>
+                                        <a href="#" class="btn-rect-5-10 btn-color-primary">Sửa</a>
+                                        <a href="#" class="btn-rect-5-10 btn-color-danger">Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn</td>
+                                <td>Thành Long</td>
+                                <td>@long99955</td>
+                                <td>admin</td>
+                                <td>
+                                    <div class="action-container">
+                                        <a href="#" class="btn-rect-5-10 btn-color-info">Xem</a>
+                                        <a href="#" class="btn-rect-5-10 btn-color-primary">Sửa</a>
+                                        <a href="#" class="btn-rect-5-10 btn-color-danger">Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="content-bottom-bar">
+                        <span>Hiển Thị 1 đến 10 của 12 mục</span>
+                        <div class="pagination">
+                            <a class="btn-rect-7-14 disable" href="#">Previous</a>
+                            <a class="btn-rect-7-14 active" href="#">1</a>
+                            <a class="btn-rect-7-14" href="#">2</a>
+                            <a class="btn-rect-7-14" href="#">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-footer">
+                2023 © petfood.com
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.menu-btn').click(function (){
+            $('aside').slideToggle(400);
+        })
+    </script>
+</body>
+</html>
