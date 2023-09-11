@@ -25,48 +25,42 @@
                     <div class="content-top-bar">
                         <span class="display-option">
                             Hiển thị
-                            <select>
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="50">50</option>
+                            <select id="item-per-page" onchange="loadSize()">
+                                <option th:selected="${size==5}" value="5">5</option>
+                                <option th:selected="${size==10}" value="10">10</option>
+                                <option th:selected="${size==50}" value="50">50</option>
                             </select>
                              mục
                         </span>
 
-                        <form action="#" class="content-search-bar">
-                            <label>Search: </label><input type="text" name="txtContentSearch">
+                        <span class="filter-container">
+                            <i class="fa-solid fa-filter"></i><span th:text="${roleName.length()>0?roleName:'Tất cả quyền'}"></span>
+                            <ul class="filter-options">
+                            </ul>
+                        </span>
+
+                        <form id="search-form" action="#" class="content-search-bar">
+                            <input type="text" onkeyup="relativeSearch(this);" th:value="${keyword}" placeholder="Search username" id="keyword">
+                            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <ul class="search-relative-display"></ul>
                         </form>
                     </div>
                     <div class="table-container">
-                        <table class="tb-style-1">
+                        <table id="user-container" class="tb-style-1">
                             <tr>
                                 <th>STT</th>
-                                <th>First Name <i class="fa-solid fa-sort"></i></th>
-                                <th>Last Name <i class="fa-solid fa-sort"></i></th>
-                                <th>Username <i class="fa-solid fa-sort"></i></th>
-                                <th>Role <i class="fa-solid fa-sort"></i></th>
+                                <th>First Name <i class="sort fa-solid fa-sort" data-sort="firstname"></i></th>
+                                <th>Last Name <i class="sort fa-solid fa-sort" data-sort="lastname"></i></th>
+                                <th>Username <i class="sort fa-solid fa-sort" data-sort="username"></i></th>
+                                <th>Role <i class="sort fa-solid fa-sort" data-sort="role"></i></th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Nguyễn</td>
-                                <td>Thành Long</td>
-                                <td>@long99955</td>
-                                <td>admin</td>
-                                <td>
-                                    <div class="action-container">
-                                        <a href="#" class="btn-rect-5-10 btn-color-info">Xem</a>
-                                        <a href="#" class="btn-rect-5-10 btn-color-primary">Sửa</a>
-                                        <a href="#" class="btn-rect-5-10 btn-color-danger">Xóa</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Nguyễn</td>
-                                <td>Thành Long</td>
-                                <td>@long99955</td>
-                                <td>admin</td>
+                            <tr th:each="user, index : ${userPage.content}">
+                                <td th:text="${(index.index + 1) * (userPage.getNumber+1)}"></td>
+                                <td th:text="${user.firstname}"></td>
+                                <td th:text="${user.lastname}"></td>
+                                <td th:text="${user.username}"></td>
+                                <td th:text="${user.role.roleName}"></td>
                                 <td>
                                     <div class="action-container">
                                         <a href="#" class="btn-rect-5-10 btn-color-info">Xem</a>
@@ -78,12 +72,16 @@
                         </table>
                     </div>
                     <div class="content-bottom-bar">
-                        <span>Hiển Thị 1 đến 10 của 12 mục</span>
+                        <span th:text="'Hiển Thị '+ ${startUser}+ ' đến '+${endUser} + ' của ' + ${totalUser}+ ' mục'"></span>
                         <div class="pagination">
-                            <a class="btn-rect-7-14 disable" href="#">Previous</a>
-                            <a class="btn-rect-7-14 active" href="#">1</a>
-                            <a class="btn-rect-7-14" href="#">2</a>
-                            <a class="btn-rect-7-14" href="#">Next</a>
+                            <a th:if="${userPage.hasPrevious()}" class="btn-rect-7-14"
+                               th:href="'tai-khoan?page=' + ${userPage.getNumber()-1} + '&sortBy=' + ${sortBy} + '&sortOrder=' + ${sortOrder}+'&size='+${size}+'&roleName='+${roleName}+'&keyword='+${keyword}">Previous</a>
+                            <a th:each="index : ${#numbers.sequence(0,userPage.getTotalPages()-1)}"
+                               th:class="'btn-rect-7-14 '+ ${userPage.getNumber()==index?'active':''}"
+                               th:href="'tai-khoan?page=' + ${index} + '&sortBy=' + ${sortBy} + '&sortOrder=' + ${sortOrder}+'&size='+${size}+'&roleName='+${roleName}+'&keyword='+${keyword}"
+                               th:text="${index + 1}"></a>
+                            <a th:if="${userPage.hasNext()}" class="btn-rect-7-14"
+                               th:href="'tai-khoan?page=' + ${userPage.getNumber()+1} + '&sortBy=' + ${sortBy} + '&sortOrder=' + ${sortOrder}+'&size='+${size}+'&roleName='+${roleName}+'&keyword='+${keyword}">Next</a>
                         </div>
                     </div>
                 </div>
@@ -91,7 +89,124 @@
             <div th:replace="~{admin/common/footer :: footer}" ></div>
         </div>
     </div>
+    <input type="hidden" id="current-query" th:value="'?page=0' + '&sortBy=' + ${sortBy} + '&sortOrder=' + ${sortOrder}+'&size='+${size}+'&roleName='+${roleName}+'&keyword='+${keyword}" >
     <script>
+        const searchRelativeDisplay = $('.search-relative-display');
+        var currentUrl = new URL(window.location.href);
+        currentUrl.search = $('#current-query').val();
+
+        function loadSize(){
+            var size = $('#item-per-page').find(':selected').val();
+            currentUrl.searchParams.set("size",size);
+            window.location.href = currentUrl.toString();
+        }
+
+        function search(keyword){
+            currentUrl.searchParams.set('keyword',keyword);
+            currentUrl.searchParams.delete('roleName');
+            window.location.href = currentUrl.toString();
+        }
+
+        $('#search-form').on("submit",function (e){
+            e.preventDefault();
+            var keyword = $('#keyword').val();
+            search(keyword);
+        })
+
+        function relativeSearch(tag){
+            var keyword = $(tag).val();
+            if(keyword){
+                searchRelativeDisplay.html("");
+                $.ajax({
+                    url: '/api/users/tim-kiem',
+                    data:{
+                        keyword: keyword
+                    },
+                    type: 'GET',
+                    dataType: 'Json',
+                    success: function(data){
+                        $.each(data,function(index,user){
+                            var userItem = `<li onclick="search('${user.username}');">${user.username}</li>`;
+                            searchRelativeDisplay.append(userItem);
+                        });
+                        searchRelativeDisplay.slideDown('fast');
+                    },error: function(xhr,status,error){
+                        searchRelativeDisplay.slideUp('fast');
+                        console.log('failed fetch: '+error);
+                    }
+                });
+            }else{
+                searchRelativeDisplay.slideUp('fast');
+            }
+        }
+
+
+        $('.sort').click(function(e){
+            e.stopPropagation();
+            closePopUp();
+            $(this).html('');
+            var sortOptions = `<ul class="sort-options">
+                                    <li><i onclick="sort(this);" class="fa-solid fa-arrow-down-a-z"></i></li>
+                                    <li><i onclick="sort(this);" class="fa-solid fa-arrow-up-a-z"></i></li>
+                                </ul>` ;
+            $(this).html(sortOptions);
+            $(this).slideDown('fast');
+        });
+
+        function sort(tag){
+            var sortOrder;
+            if($(tag).hasClass('fa-arrow-down-a-z')){
+                sortOrder = 'acs';
+            }else{
+                sortOrder = 'desc';
+            }
+            var sortBy = $(tag).closest('.sort').data('sort');
+            currentUrl.searchParams.set('sortBy',sortBy);
+            currentUrl.searchParams.set('sortOrder',sortOrder);
+            window.location.href = currentUrl.toString();
+        }
+
+
+        $('.filter-container').click(function(e){
+            e.stopPropagation();
+            $('.filter-options').slideDown('fast');
+        });
+
+        function fetchRole(){
+            var filterOptions = $('.filter-options');
+            filterOptions.append(`<li onclick="filterRole('')">Tất cả quyền</li>`)
+            $.ajax({
+                url:'/api/roles',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){
+                    $.each(data._embedded.roles, function(index,role){
+                        var roleItem = `<li onclick="filterRole('${role.roleName}')">${role.roleName}</li>`;
+                         filterOptions.append(roleItem);
+                    });
+                },error: function(xhr,status,error){
+                    console.error('failed fetch role: '+error);
+                }
+            });
+        }
+
+        fetchRole();
+
+        function filterRole(roleName){
+            currentUrl.searchParams.set('roleName',roleName);
+            window.location.href = currentUrl.toString();
+        };
+
+        function closePopUp(){
+            searchRelativeDisplay.slideUp('fast');
+            $('.sort-options').slideUp('fast');
+            $('.filter-options').slideUp('fast');
+        }
+
+        $(document).click(function(){
+            closePopUp();
+        });
+
 
     </script>
 </body>

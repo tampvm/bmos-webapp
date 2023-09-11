@@ -111,6 +111,8 @@ body{
     font-size: 14px;
     font-weight: 500;
     color: #333;
+    flex-wrap:wrap;
+    gap:16px;
 }
 
 .display-option select{
@@ -120,12 +122,111 @@ body{
     border: 1px solid #333;
 }
 
+.filter-container{
+    color: #666;
+    cursor: pointer;
+    line-height: 30px;
+    padding: 0 8px;
+    transition: all ease-in-out .3s;
+    position: relative;
+    width: 130px;
+    text-transform: capitalize;
+}
+
+.filter-container span{
+    margin-left: 8px;
+}
+
+.filter-container:hover{
+    background-color: #666;
+    color: #fff;
+}
+
+.filter-options{
+    list-style-type: none;
+    position: absolute;
+    z-index: 10;
+    background-color: #666;
+    color: #fff;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    display: none;
+}
+
+.filter-options li{
+    padding-left: 32px;
+    font-size: 12px;
+    font-weight: 300;
+    transition: all ease-in-out .3s;
+    text-transform: capitalize;
+}
+
+.filter-options li:hover{
+    background-color: #fff;
+    color: #666;
+    font-size: 14px;
+}
+
+.content-search-bar{
+    position: relative;
+}
+
 .content-search-bar input{
     height: 30px;
     border: 1px solid #333;
     border-radius: 4px;
     padding: 7px;
     outline: none;
+}
+
+.content-search-bar button{
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    border: 1px solid #333;
+    border-radius: 50%;
+    line-height: 30px;
+    cursor: pointer;
+    transition: all ease-in-out .3s;
+}
+
+.content-search-bar button:hover{
+    color: white;
+    background-color: #333;
+
+}
+
+.content-search-bar .search-relative-display{
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    width: 178px;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
+    color: #797979;
+    font-size: 12px;
+    font-weight: 300;
+    max-height: 250px;
+    overflow: scroll;
+    display: none;
+    z-index:10;
+}
+
+.content-search-bar .search-relative-display::-webkit-scrollbar{
+    display: none;
+}
+
+.search-relative-display li{
+    padding: 7px;
+    cursor: pointer;
+}
+
+.search-relative-display li:hover{
+    background-color: #ddd;
 }
 
 .table-container{
@@ -158,6 +259,27 @@ body{
     font-size: 12px;
     padding: 4px;
     cursor:pointer;
+    position:relative;
+}
+
+.tb-style-1 .sort-options{
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    list-style-type: none;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+.tb-style-1 .sort-options i{
+    padding: 8px;
+}
+
+.tb-style-1 .sort-options i:hover{
+    background-color: #ddd;
 }
 
 .tb-style-1 tr:last-child td{
@@ -173,6 +295,7 @@ body{
 }
 
 .pagination{
+    display: flex;
     gap: 8px;
 }
 

@@ -1,6 +1,8 @@
 package com.aeronosh.bmos.entities;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
@@ -49,6 +51,7 @@ public class User implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_role_id", nullable = false)
+    @JsonIgnore
     private Role role;
 
     @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL)
